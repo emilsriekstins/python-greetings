@@ -63,5 +63,5 @@ def test(String environment) {
     echo "API test executuon against Python microservice on ${environment} environment.."
     sh "docker pull emilsriekstins/api-tests:latest"
     String lowerCaseEnv = environment.toLowerCase()
-    sh "docker run --rm --network=host emilsriekstins/api-tests:latest run greetings greetings_${environment}"
+    sh "docker run --rm --network=host emilsriekstins/api-tests:latest run greetings greetings_${lowerCaseEnv}"
 }
