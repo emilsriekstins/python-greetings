@@ -29,7 +29,7 @@ pipeline {
                 test("STG")
             }
         }
-        stage('deploy-to-prd') {
+        stage('deploy-to-prod') {
             steps {
                 deploy("PROD")
             }
@@ -59,10 +59,9 @@ def deploy(String environment) {
     sh "docker compose up -d greetings-app-${lowerCaseEnv}"
 }
 
-def test(String environment){
+def test(String environment) {
     echo "API test executuon against Python microservice on ${environment} environment.."
     sh "docker pull emilsriekstins/api-tests:latest"
-    def directory = pwd()
-    sh "echo '${directory}'"
+    String lowerCaseEnv = environment.toLowerCase()
     sh "docker run --rm --network=host emilsriekstins/api-tests:latest run greetings greetings_${environment}"
 }
