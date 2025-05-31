@@ -51,7 +51,7 @@ def buildApp(){
 }
 
 def deploy(String environment) {
-    echo "Deploying Python microservice ${environment} environment.."
+    echo "Deploying Python microservice to ${environment} environment.."
     sh "docker pull emilsriekstins/python-greetings-app:latest" 
     String lowerCaseEnv = environment.toLowerCase()
     sh "docker compose stop greetings-app-${lowerCaseEnv}"
